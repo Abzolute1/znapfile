@@ -1,0 +1,23 @@
+{
+  "deployed_at": "2025-07-30 23:45:57",
+  "platforms": {
+    "github_pages": {
+      "url": "https://abzolute1.github.io/znapfile",
+      "custom_domain": "znapfile.com",
+      "status": "active"
+    },
+    "cloudflare_tunnel": {
+      "frontend": "https://mental-hired-lc-ou.trycloudflare.com",
+      "backend": "https://catch-pairs-bodies-confidence.trycloudflare.com",
+      "status": "active"
+    }
+  },
+  "dns_instructions": {
+    "cloudflare": [
+      "Type: CNAME",
+      "Name: @",
+      "Target: abzolute1.github.io",
+      "Proxy: ON (orange cloud)"
+    ]
+  }
+}
