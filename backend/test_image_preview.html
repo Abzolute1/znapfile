@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Preview Test</title>
+</head>
+<body>
+    <h1>Testing Image Preview</h1>
+    <p>Trying to load image from: http://localhost:8000/api/v1/download/8m9rql3Ycv/preview</p>
+    
+    <img 
+        src="http://localhost:8000/api/v1/download/8m9rql3Ycv/preview" 
+        alt="Test Image"
+        style="max-width: 500px; border: 1px solid red;"
+        onload="console.log('Image loaded successfully!')"
+        onerror="console.error('Image failed to load:', event)"
+    />
+    
+    <script>
+        // Also try with fetch
+        fetch('http://localhost:8000/api/v1/download/8m9rql3Ycv/preview')
+            .then(response => {
+                console.log('Fetch response:', response);
+                console.log('Headers:', [...response.headers.entries()]);
+                return response.blob();
+            })
+            .then(blob => {
+                console.log('Blob size:', blob.size);
+                console.log('Blob type:', blob.type);
+                
+                // Create object URL and display
+                const url = URL.createObjectURL(blob);
+                const img = document.createElement('img');
+                img.src = url;
+                img.style.maxWidth = '500px';
+                img.style.border = '1px solid green';
+                document.body.appendChild(img);
+            })
+            .catch(error => console.error('Fetch error:', error));
+    </script>
+</body>
+</html>

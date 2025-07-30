@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Share Modal</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 50px;
+        }
+        .info {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #6366f1;
+        }
+        code {
+            background: #2a2a2a;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .success {
+            color: #10b981;
+        }
+        .warning {
+            color: #f59e0b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Znapfile - Share Feature Test</h1>
+    
+    <div class="info">
+        <h2>Current Implementation Status</h2>
+        <p>✅ Backend email sharing endpoints created and working</p>
+        <p>✅ ShareModal component created with email form</p>
+        <p>✅ Share buttons integrated in file lists</p>
+        <p>✅ Collection downloads fixed</p>
+    </div>
+
+    <div class="test-section">
+        <h2>How to Test Email Sharing</h2>
+        <ol>
+            <li>Go to Dashboard at <a href="http://localhost:5177/dashboard" style="color: #6366f1;">http://localhost:5177/dashboard</a></li>
+            <li>Upload a file if you don't have any</li>
+            <li>In Grid View: Click the "Share" button on any file card</li>
+            <li>In List View: Click the share icon (Share2) in the actions column</li>
+            <li>A modal should appear with:
+                <ul>
+                    <li>Email tab (active by default)</li>
+                    <li>Copy Link tab</li>
+                    <li>Email form with recipient, sender name, and message fields</li>
+                </ul>
+            </li>
+            <li>Fill in the email form and click "Send Email"</li>
+            <li>In development mode, the email details will be printed to the backend console</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>What You Should See</h2>
+        <p>When you click the Share button, you should see:</p>
+        <ul>
+            <li>A modal popup with "Share File" title</li>
+            <li>Two tabs: "Email" and "Copy Link"</li>
+            <li>Email form with fields for recipient email, names, and message</li>
+            <li>The direct link at the bottom of the modal</li>
+        </ul>
+        <p class="warning">If you only see "copy option for download URL", the modal might not be opening properly.</p>
+    </div>
+
+    <div class="test-section">
+        <h2>Debug Steps</h2>
+        <p>Open browser DevTools (F12) and check:</p>
+        <ol>
+            <li>Console tab for any errors when clicking Share</li>
+            <li>Look for: <code>Share action triggered for file: {...}</code></li>
+            <li>Look for: <code>ShareModal render: {isOpen: true, file: {...}}</code></li>
+            <li>Network tab to see if API calls are made when sending email</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>Backend Console Output</h2>
+        <p>When email is sent in dev mode, backend will print:</p>
+        <pre style="background: #1a1a1a; padding: 10px; border-radius: 5px;">
+📄 File Share Link (dev mode):
+To: recipient@example.com
+From: Sender Name (sender@example.com)
+File: filename.pdf (15.2 MB)
+Expires: December 28, 2024 at 3:30 PM
+Message: Check out this file!
+Link: http://localhost:5177/d/abc123
+        </pre>
+    </div>
+</body>
+</html>

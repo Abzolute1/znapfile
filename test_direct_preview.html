@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direct Preview Test</title>
+</head>
+<body>
+    <h1>Direct Image Preview Test</h1>
+    <p>This tests the preview API directly without React:</p>
+    
+    <div style="border: 2px solid red; padding: 20px; margin: 20px;">
+        <h2>Test 1: Direct IMG tag</h2>
+        <img src="http://localhost:8000/api/v1/simple/preview/8m9rql3Ycv" 
+             alt="Direct preview test" 
+             style="max-width: 500px; border: 1px solid blue;"
+             onload="console.log('Image loaded successfully!')"
+             onerror="console.error('Image failed to load')" />
+    </div>
+    
+    <div style="border: 2px solid green; padding: 20px; margin: 20px;">
+        <h2>Test 2: JavaScript Fetch</h2>
+        <div id="fetch-result"></div>
+        <img id="fetch-img" style="max-width: 500px; display: none;" />
+    </div>
+    
+    <script>
+        // Test with fetch
+        fetch('http://localhost:8000/api/v1/simple/preview/8m9rql3Ycv')
+            .then(response => {
+                console.log('Fetch response:', response);
+                console.log('Content-Type:', response.headers.get('Content-Type'));
+                console.log('Content-Length:', response.headers.get('Content-Length'));
+                
+                document.getElementById('fetch-result').innerHTML = 
+                    `Status: ${response.status}<br>
+                     Content-Type: ${response.headers.get('Content-Type')}<br>
+                     Size: ${response.headers.get('Content-Length')} bytes`;
+                
+                return response.blob();
+            })
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                const img = document.getElementById('fetch-img');
+                img.src = url;
+                img.style.display = 'block';
+                console.log('Blob URL created:', url);
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+                document.getElementById('fetch-result').innerHTML = 'Error: ' + error;
+            });
+    </script>
+</body>
+</html>

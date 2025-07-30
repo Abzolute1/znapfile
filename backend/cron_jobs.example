@@ -1,0 +1,17 @@
+# Example cron jobs for FileShare/ZnapFile maintenance
+# Add these to your crontab with: crontab -e
+
+# Run expired collections cleanup every hour
+0 * * * * cd /path/to/FileShare/backend && /path/to/venv/bin/python cleanup_expired_collections.py >> /var/log/fileshare/cleanup.log 2>&1
+
+# Run expired files cleanup daily at 2 AM
+0 2 * * * cd /path/to/FileShare/backend && /path/to/venv/bin/python -c "from app.core.file_cleanup import cleanup_expired_files; import asyncio; asyncio.run(cleanup_expired_files())" >> /var/log/fileshare/cleanup.log 2>&1
+
+# Generate usage reports weekly on Sunday at 3 AM
+0 3 * * 0 cd /path/to/FileShare/backend && /path/to/venv/bin/python generate_weekly_report.py >> /var/log/fileshare/reports.log 2>&1
+
+# Backup database daily at 4 AM
+0 4 * * * /usr/bin/sqlite3 /path/to/FileShare/backend/fileshare.db ".backup '/path/to/backups/fileshare_$(date +\%Y\%m\%d).db'" >> /var/log/fileshare/backup.log 2>&1
+
+# Clean old backups (keep last 30 days) weekly
+0 5 * * 0 find /path/to/backups -name "fileshare_*.db" -mtime +30 -delete >> /var/log/fileshare/backup.log 2>&1

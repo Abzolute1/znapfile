@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Test - Znapfile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .preview-box {
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+        }
+        .preview-box img {
+            max-width: 100%;
+            max-height: 600px;
+            object-fit: contain;
+        }
+        .preview-box iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        .controls {
+            margin: 10px 0;
+        }
+        .controls input {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .controls button {
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .controls button:hover {
+            background: #0056b3;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Znapfile Preview Testing</h1>
+    
+    <div class="info">
+        <strong>Instructions:</strong> Enter a file code to test the preview functionality. 
+        The preview should display images inline without allowing downloads, and PDFs should be 
+        rendered as images (or in an iframe as fallback).
+    </div>
+
+    <div class="test-container">
+        <h2>Manual Preview Test</h2>
+        <div class="controls">
+            <input type="text" id="fileCode" placeholder="Enter file code (e.g., abc123)" />
+            <input type="password" id="password" placeholder="Password (if required)" />
+            <button onclick="testPreview()">Test Preview</button>
+            <button onclick="clearPreview()">Clear</button>
+        </div>
+        
+        <div id="status"></div>
+        
+        <div class="preview-box" id="previewBox">
+            <p style="color: #999;">Preview will appear here...</p>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>Direct Image Test</h2>
+        <p>Testing direct image loading with error handling:</p>
+        <div class="preview-box">
+            <img id="directImage" 
+                 alt="Direct preview test" 
+                 onerror="handleImageError(this)"
+                 onload="handleImageLoad(this)" />
+        </div>
+        <div class="controls">
+            <input type="text" id="directCode" placeholder="Enter file code" />
+            <button onclick="testDirectImage()">Load Image</button>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000/api/v1';
+        
+        function showStatus(message, isError = false) {
+            const status = document.getElementById('status');
+            status.className = 'status ' + (isError ? 'error' : 'success');
+            status.textContent = message;
+        }
+        
+        async function testPreview() {
+            const fileCode = document.getElementById('fileCode').value.trim();
+            const password = document.getElementById('password').value;
+            
+            if (!fileCode) {
+                showStatus('Please enter a file code', true);
+                return;
+            }
+            
+            const previewBox = document.getElementById('previewBox');
+            previewBox.innerHTML = '<p>Loading preview...</p>';
+            
+            try {
+                // First, get file info to determine type
+                const infoUrl = `${API_URL}/download/${fileCode}/info`;
+                const infoResponse = await fetch(infoUrl);
+                
+                if (!infoResponse.ok) {
+                    throw new Error(`File info failed: ${infoResponse.status}`);
+                }
+                
+                const fileInfo = await infoResponse.json();
+                console.log('File info:', fileInfo);
+                
+                // Build preview URL
+                let previewUrl = `${API_URL}/download/${fileCode}/preview`;
+                if (password) {
+                    previewUrl += `?password=${encodeURIComponent(password)}`;
+                }
+                
+                // Determine how to display based on mime type
+                const mimeType = fileInfo.mime_type || '';
+                
+                if (mimeType.startsWith('image/')) {
+                    // Display as image
+                    previewBox.innerHTML = `<img src="${previewUrl}" alt="Preview" />`;
+                    showStatus(`Loading image preview for: ${fileInfo.original_filename}`);
+                } else if (mimeType === 'application/pdf') {
+                    // Try image first (if PDF-to-image is working), fallback to iframe
+                    const img = new Image();
+                    img.onload = function() {
+                        previewBox.innerHTML = '';
+                        previewBox.appendChild(img);
+                        showStatus(`PDF rendered as image: ${fileInfo.original_filename}`);
+                    };
+                    img.onerror = function() {
+                        // Fallback to iframe
+                        previewBox.innerHTML = `<iframe src="${previewUrl}"></iframe>`;
+                        showStatus(`PDF displayed in iframe: ${fileInfo.original_filename}`);
+                    };
+                    img.src = previewUrl;
+                } else if (mimeType.startsWith('video/')) {
+                    // Display as video
+                    previewBox.innerHTML = `<video src="${previewUrl}" controls></video>`;
+                    showStatus(`Loading video preview for: ${fileInfo.original_filename}`);
+                } else if (mimeType.startsWith('audio/')) {
+                    // Display as audio
+                    previewBox.innerHTML = `<audio src="${previewUrl}" controls></audio>`;
+                    showStatus(`Loading audio preview for: ${fileInfo.original_filename}`);
+                } else {
+                    // Fetch and display as text
+                    const response = await fetch(previewUrl);
+                    const text = await response.text();
+                    previewBox.innerHTML = `<pre style="text-align: left; overflow: auto; width: 100%;">${escapeHtml(text)}</pre>`;
+                    showStatus(`Text preview loaded for: ${fileInfo.original_filename}`);
+                }
+                
+            } catch (error) {
+                previewBox.innerHTML = '<p style="color: red;">Failed to load preview</p>';
+                showStatus(`Error: ${error.message}`, true);
+                console.error('Preview error:', error);
+            }
+        }
+        
+        function clearPreview() {
+            document.getElementById('previewBox').innerHTML = '<p style="color: #999;">Preview will appear here...</p>';
+            document.getElementById('status').textContent = '';
+            document.getElementById('fileCode').value = '';
+            document.getElementById('password').value = '';
+        }
+        
+        function testDirectImage() {
+            const code = document.getElementById('directCode').value.trim();
+            if (!code) {
+                alert('Please enter a file code');
+                return;
+            }
+            
+            const img = document.getElementById('directImage');
+            img.src = `${API_URL}/download/${code}/preview`;
+        }
+        
+        function handleImageError(img) {
+            console.error('Image failed to load');
+            img.alt = 'Failed to load image';
+            showStatus('Image preview failed to load', true);
+        }
+        
+        function handleImageLoad(img) {
+            console.log('Image loaded successfully');
+            showStatus('Image preview loaded successfully');
+        }
+        
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+        
+        // Test with URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const codeParam = urlParams.get('code');
+        if (codeParam) {
+            document.getElementById('fileCode').value = codeParam;
+            testPreview();
+        }
+    </script>
+</body>
+</html>

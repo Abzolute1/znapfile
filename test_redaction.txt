@@ -1,0 +1,10 @@
+Line 1: This is a test file for redaction
+Line 2: This line should be visible
+Line 3: This line should be visible  
+Line 4: SENSITIVE DATA - SHOULD BE REDACTED
+Line 5: PASSWORD = SuperSecret123!
+Line 6: API_KEY = sk-1234567890abcdef
+Line 7: CONFIDENTIAL INFORMATION
+Line 8: SECRET = my-secret-key-12345
+Line 9: PRIVATE DATA - DO NOT SHARE
+Line 10: This is the last line

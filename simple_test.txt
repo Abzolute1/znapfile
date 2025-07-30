@@ -1,0 +1,10 @@
+Line 1: Visible line
+Line 2: Visible line
+Line 3: Visible line
+Line 4: HIDDEN - password
+Line 5: HIDDEN - secret
+Line 6: HIDDEN - api key
+Line 7: HIDDEN - token
+Line 8: HIDDEN - private
+Line 9: HIDDEN - confidential
+Line 10: HIDDEN - sensitive
