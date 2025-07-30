@@ -1,0 +1,13 @@
+{
+  "deployment": "immortal",
+  "services": {
+    "cloudflare_worker": "https://znapfile.workers.dev",
+    "deno_deploy": "https://znapfile.deno.dev",
+    "github_pages": "https://znapfile.com",
+    "p2p_network": "active",
+    "storage": "quantum-distributed"
+  },
+  "cost": "$0.00/month",
+  "uptime": "∞",
+  "scale": "unlimited"
+}

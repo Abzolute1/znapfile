@@ -1,0 +1,22 @@
+{
+  "dns_records": [
+    {
+      "type": "CNAME",
+      "name": "znapfile.com",
+      "content": "abzolute1.github.io",
+      "proxied": true,
+      "ttl": "auto",
+      "comment": "GitHub Pages - configured by Kangal AI"
+    },
+    {
+      "type": "CNAME",
+      "name": "www",
+      "content": "znapfile.com",
+      "proxied": true,
+      "ttl": "auto",
+      "comment": "WWW redirect"
+    }
+  ],
+  "account_id": "771e467bc26f111ecfa799d97da1d2ea",
+  "zone_name": "znapfile.com"
+}
