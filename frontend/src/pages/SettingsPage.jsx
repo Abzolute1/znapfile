@@ -367,7 +367,7 @@ const SettingsPage = () => {
                         <p className="text-text-muted text-sm">For professionals</p>
                       </div>
                       <div className="text-3xl font-bold mb-4">
-                        $6.99<span className="text-sm font-normal text-text-muted">/month</span>
+                        $9.99<span className="text-sm font-normal text-text-muted">/month</span>
                       </div>
                       <ul className="space-y-2 text-sm mb-6">
                         <li className="flex items-start gap-2">
@@ -408,7 +408,7 @@ const SettingsPage = () => {
                         <p className="text-text-muted text-sm">For power users</p>
                       </div>
                       <div className="text-3xl font-bold mb-4">
-                        $21.99<span className="text-sm font-normal text-text-muted">/month</span>
+                        $24.99<span className="text-sm font-normal text-text-muted">/month</span>
                       </div>
                       <ul className="space-y-2 text-sm mb-6">
                         <li className="flex items-start gap-2">

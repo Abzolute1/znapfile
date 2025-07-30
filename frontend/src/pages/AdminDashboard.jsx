@@ -268,11 +268,11 @@ const AdminDashboard = () => {
                     <span className="font-medium">{overview?.users_by_tier?.free || 0}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-text-muted">Pro ($6.99/mo)</span>
+                    <span className="text-text-muted">Pro ($9.99/mo)</span>
                     <span className="font-medium">{overview?.users_by_tier?.pro || 0}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-text-muted">Max ($21.99/mo)</span>
+                    <span className="text-text-muted">Max ($24.99/mo)</span>
                     <span className="font-medium">{overview?.users_by_tier?.max || 0}</span>
                   </div>
                 </div>

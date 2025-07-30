@@ -27,7 +27,7 @@ const PricingModal = ({ isOpen, onClose, onSelectPlan }) => {
     {
       id: 'pro',
       name: 'Pro',
-      price: '$6.99',
+      price: '$9.99',
       period: '/month',
       icon: Zap,
       color: 'from-purple-500 to-pink-500',
@@ -45,7 +45,7 @@ const PricingModal = ({ isOpen, onClose, onSelectPlan }) => {
     {
       id: 'max',
       name: 'Max',
-      price: '$21.99',
+      price: '$24.99',
       period: '/month',
       icon: Crown,
       color: 'from-orange-500 to-red-500',

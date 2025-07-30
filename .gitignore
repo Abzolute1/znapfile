@@ -90,3 +90,4 @@ test_*.py
 # Credentials
 CLOUDFLARE_R2_CREDENTIALS.md
 RENDER_DATABASE.md
+GITHUB_TOKEN.md

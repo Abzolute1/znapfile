@@ -4,7 +4,7 @@
 
 - **File Sharing**: Upload files with expiry dates, password protection, and download limits
 - **Collections**: Organize files into shareable collections with folder structure
-- **Billing**: Integrated Stripe subscriptions (Free, Pro $6.99, Max $21.99)
+- **Billing**: Integrated Stripe subscriptions (Free, Pro $9.99, Max $24.99)
 - **Storage**: Cloudflare R2 with FREE egress (no bandwidth costs!)
 - **Security**: File encryption, JWT auth, password protection
 
@@ -47,13 +47,13 @@ FileShare/
 - 24-hour file expiry
 - 5 transfers/day
 
-**Pro Plan ($6.99/month)**
+**Pro Plan ($9.99/month)**
 - 10GB file size limit  
 - 300GB monthly transfer
 - 7-day max expiry
 - Unlimited transfers
 
-**Max Plan ($21.99/month)**
+**Max Plan ($24.99/month)**
 - 50GB file size limit
 - 1TB monthly transfer
 - 20-day max expiry
