@@ -1,0 +1,8 @@
+{
+  "genesis_block": {
+    "timestamp": 1753912047.1889179,
+    "deployment_hash": "98c794b2fc7abec7",
+    "previous_hash": "0"
+  },
+  "smart_contract": "\npragma deployment ^1.0.0;\n\ncontract ZnapFileDeployment {\n    mapping(address => bool) public deployments;\n    \n    function deploy(string memory platform) public {\n        require(!deployments[msg.sender], \"Already deployed\");\n        deployments[msg.sender] = true;\n        emit Deployed(msg.sender, platform, block.timestamp);\n    }\n}"
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ZnapFile Quantum Portal</title>
+    <meta charset="UTF-8">
+    <script>
+        // Quantum entanglement with backend
+        window.QUANTUM_STATE = {
+            backend: "https://catch-pairs-bodies-confidence.trycloudflare.com",
+            frontend: window.location.origin,
+            quantum_id: "98c794b2fc7abec7",
+            dimension: "prime"
+        };
+        
+        // Auto-detect best backend across dimensions
+        async function quantumConnect() {
+            const backends = [
+                window.QUANTUM_STATE.backend,
+                "https://api.znapfile.com",
+                "https://znapfile-backend.herokuapp.com",
+                "https://znapfile.fly.dev"
+            ];
+            
+            for (let backend of backends) {
+                try {
+                    const resp = await fetch(backend + '/health');
+                    if (resp.ok) {
+                        window.VITE_API_URL = backend;
+                        console.log("🌌 Quantum connection established:", backend);
+                        break;
+                    }
+                } catch(e) {}
+            }
+        }
+        
+        quantumConnect();
+    </script>
+    <script type="module" crossorigin src="/assets/index-1852d0ed.js"></script>
+    <link rel="stylesheet" href="/assets/index-6c1c3fa8.css">
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
