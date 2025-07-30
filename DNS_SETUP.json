@@ -1,0 +1,33 @@
+{
+  "cloudflare_dns_records": [
+    {
+      "type": "CNAME",
+      "name": "@",
+      "content": "abzolute1.github.io",
+      "proxied": true,
+      "ttl": "auto",
+      "comment": "Main domain to GitHub Pages"
+    },
+    {
+      "type": "CNAME",
+      "name": "www",
+      "content": "znapfile.com",
+      "proxied": true,
+      "ttl": "auto",
+      "comment": "WWW redirect"
+    },
+    {
+      "type": "TXT",
+      "name": "_github-pages-challenge-Abzolute1",
+      "content": "YOUR_GITHUB_VERIFICATION_CODE",
+      "proxied": false,
+      "ttl": 300,
+      "comment": "GitHub domain verification"
+    }
+  ],
+  "github_pages_settings": {
+    "source": "gh-pages branch",
+    "custom_domain": "znapfile.com",
+    "enforce_https": true
+  }
+}

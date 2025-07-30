@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ZnapFile Status Monitor</title>
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            font-family: monospace; 
+            background: #000; 
+            color: #0f0; 
+            padding: 20px;
+        }
+        .status { 
+            padding: 10px; 
+            margin: 10px 0; 
+            border: 1px solid #0f0;
+        }
+        .online { color: #0f0; }
+        .offline { color: #f00; }
+        .checking { color: #ff0; }
+    </style>
+</head>
+<body>
+    <h1>🌌 ZnapFile Quantum Status Monitor</h1>
+    <div id="status-container"></div>
+    
+    <script>
+        const endpoints = [
+            { name: "Frontend (GitHub Pages)", url: "https://abzolute1.github.io/znapfile" },
+            { name: "Frontend (Custom Domain)", url: "https://znapfile.com" },
+            { name: "Backend API", url: "https://catch-pairs-bodies-confidence.trycloudflare.com/docs" },
+            { name: "Health Check", url: "https://catch-pairs-bodies-confidence.trycloudflare.com/health" }
+        ];
+        
+        async function checkStatus() {
+            const container = document.getElementById('status-container');
+            container.innerHTML = '<h2>Checking all systems...</h2>';
+            
+            for (const endpoint of endpoints) {
+                const div = document.createElement('div');
+                div.className = 'status checking';
+                div.textContent = `⏳ ${endpoint.name}: Checking...`;
+                container.appendChild(div);
+                
+                try {
+                    const response = await fetch(endpoint.url, { mode: 'no-cors' });
+                    div.className = 'status online';
+                    div.textContent = `✅ ${endpoint.name}: ONLINE`;
+                } catch (error) {
+                    div.className = 'status offline';
+                    div.textContent = `❌ ${endpoint.name}: OFFLINE`;
+                }
+            }
+            
+            const update = document.createElement('div');
+            update.style.marginTop = '20px';
+            update.textContent = `Last check: ${new Date().toLocaleString()}`;
+            container.appendChild(update);
+        }
+        
+        // Check every 30 seconds
+        checkStatus();
+        setInterval(checkStatus, 30000);
+    </script>
+</body>
+</html>
