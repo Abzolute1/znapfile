@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background Circle -->
+  <circle cx="50" cy="50" r="45" fill="#8B5CF6"/>
+  
+  <!-- Letter Z with gradient -->
+  <defs>
+    <linearGradient id="zGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#A78BFA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Stylized Z -->
+  <path d="M 25 30 L 65 30 L 35 65 L 75 65 L 75 70 L 35 70 L 65 35 L 25 35 Z" 
+        fill="white" 
+        stroke="none"/>
+  
+  <!-- Small lightning effect -->
+  <path d="M 60 25 L 55 30 L 58 28 L 53 33 L 56 31 Z" 
+        fill="#FCD34D" 
+        opacity="0.8"/>
+</svg>
