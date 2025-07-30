@@ -110,7 +110,7 @@ app.add_middleware(
 if not settings.DEBUG:
     app.add_middleware(
         TrustedHostMiddleware, 
-        allowed_hosts=["*.fileshare.com", "fileshare.com", "localhost"]
+        allowed_hosts=["*.fileshare.com", "fileshare.com", "localhost", "*.trycloudflare.com", "alexmaras.github.io", "*.github.io", "znapfile.com", "*.znapfile.com"]
     )
 
 # GZip compression middleware for responses
