@@ -1,0 +1,12 @@
+{
+  "name": "znapfile-quantum-backend",
+  "version": "1.0.0",
+  "description": "Immortal distributed backend for ZnapFile",
+  "scripts": {
+    "deploy:deno": "cd deno && deployctl deploy --project=znapfile --prod main.ts",
+    "deploy:vercel": "cd vercel && vercel --prod",
+    "deploy:netlify": "cd netlify && netlify deploy --prod",
+    "deploy:cloudflare": "cd cloudflare && wrangler deploy",
+    "deploy:all": "./deploy-all.sh"
+  }
+}
