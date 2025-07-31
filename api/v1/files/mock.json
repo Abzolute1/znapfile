@@ -1,0 +1,9 @@
+{
+  "id": "mock-file-001",
+  "filename": "example.txt",
+  "size": 1024,
+  "upload_date": "2024-07-31T00:00:00Z",
+  "expiry_date": "2024-08-01T00:00:00Z",
+  "download_count": 0,
+  "is_password_protected": false
+}

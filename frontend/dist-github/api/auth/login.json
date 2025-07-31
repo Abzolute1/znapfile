@@ -1,0 +1,17 @@
+{
+  "credentials": {
+    "admin@znapfile.com": {
+      "password": "SecurePass123!",
+      "response": {
+        "user": {
+          "id": "admin-001",
+          "email": "admin@znapfile.com",
+          "username": "admin",
+          "plan": "max"
+        },
+        "access_token": "github-pages-token-2024",
+        "refresh_token": "github-pages-refresh-2024"
+      }
+    }
+  }
+}
