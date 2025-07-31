@@ -1,0 +1,13 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-all --watch main.ts",
+    "start": "deno run --allow-all main.ts"
+  },
+  "imports": {
+    "oak": "https://deno.land/x/oak@v12.6.1/mod.ts",
+    "djwt": "https://deno.land/x/djwt@v2.8/mod.ts",
+    "bcrypt": "https://deno.land/x/bcrypt@v0.4.1/mod.ts",
+    "nanoid": "https://deno.land/x/nanoid@v3.0.0/mod.ts",
+    "aws-sdk": "https://deno.land/x/aws_sdk@v3.4.1.0/"
+  }
+}

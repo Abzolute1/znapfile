@@ -1,0 +1,14 @@
+{
+  "name": "znapfile-deploy",
+  "version": "1.0.0",
+  "description": "Deploy ZnapFile quantum backend to multiple free services",
+  "bin": {
+    "znapfile-deploy": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["znapfile", "deploy", "quantum", "backend"],
+  "author": "ZnapFile",
+  "license": "MIT"
+}
