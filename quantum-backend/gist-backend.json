@@ -1,0 +1,27 @@
+{
+  "service": "znapfile-quantum-backend",
+  "health": {
+    "status": "ok",
+    "service": "github-gist",
+    "mode": "static-json"
+  },
+  "auth": {
+    "admin@znapfile.com": {
+      "password": "SecurePass123!",
+      "response": {
+        "user": {
+          "id": "admin-001",
+          "email": "admin@znapfile.com",
+          "username": "admin",
+          "plan": "max"
+        },
+        "access_token": "gist-static-token",
+        "refresh_token": "gist-static-refresh"
+      }
+    }
+  },
+  "endpoints": {
+    "login": "https://gist.githubusercontent.com/[user]/[gist-id]/raw/auth.json",
+    "health": "https://gist.githubusercontent.com/[user]/[gist-id]/raw/health.json"
+  }
+}

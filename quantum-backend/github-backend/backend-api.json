@@ -1,0 +1,28 @@
+{
+  "name": "znapfile-quantum-backend",
+  "description": "This file serves as a backend API using GitHub raw URLs",
+  "api": {
+    "health": {
+      "status": "ok",
+      "service": "github-raw",
+      "timestamp": "live",
+      "message": "Backend running via GitHub!"
+    },
+    "auth": {
+      "credentials": {
+        "admin@znapfile.com": "SecurePass123!"
+      },
+      "response": {
+        "user": {
+          "id": "admin-001",
+          "email": "admin@znapfile.com",
+          "username": "admin",
+          "plan": "max"
+        },
+        "access_token": "github-token-example",
+        "refresh_token": "github-refresh-example"
+      }
+    }
+  },
+  "instructions": "Access this file via: https://raw.githubusercontent.com/alexmaras/FileShare/main/quantum-backend/github-backend/backend-api.json"
+}
